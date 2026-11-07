@@ -1,19 +1,24 @@
+
 ---
 layout: page
 title: Materials
 permalink: /materials/
 ---
 
-{% include image.html url="/_images/cover2.jpg" width=175 align="right" %}
+## Main References
 
-## Main Reference
+### [1] Computer Security: Art and Science
 
-**Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow**
+**Matt Bishop**
 
-Aurélien Géron
+2nd Edition, Addison-Wesley (Pearson), 2019.
 
-3rd Edition, O'Reilly Media, 2022.
+### [2] Computer Security: Principles and Practice
+
+**William Stallings and Lawrie Brown**
+
+3rd Edition, Pearson, 2015.
 
 ## Additional Course Materials
 
-* Additional course materials, lecture notes, datasets, and supplementary references will be published here throughout the semester.
+Lecture slides, supplementary readings, and other course materials will be made available throughout the semester.
