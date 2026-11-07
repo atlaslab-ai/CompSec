@@ -4,7 +4,14 @@
 #course-lab .lab-intro h1{margin-bottom:16px}
 #course-lab .lab-intro p{color:#536878;margin:0}
 #course-lab .lab-card{border:1px solid #d7e3ed;border-top:3px solid #336699;border-radius:10px;background:#fff;box-shadow:0 7px 25px #20394d08;padding:28px 30px 0}
-#course-lab .lab-heading{display:flex;gap:15px;align-items:center;margin-bottom:18px}
+#course-lab .lab-heading{display:flex;gap:15px;align-items:center;margin:0;padding-bottom:28px;cursor:pointer;list-style:none}
+#course-lab .lab-heading::-webkit-details-marker{display:none}
+#course-lab .lab-card[open]>.lab-heading{padding-bottom:18px}
+#course-lab .lab-heading:focus-visible{outline:3px solid #a8431e;outline-offset:6px;border-radius:4px}
+#course-lab .lab-toggle{margin-left:auto;font-size:13px;color:#336699;flex-shrink:0}
+#course-lab .lab-card[open] .lab-toggle{transform:rotate(180deg)}
+#course-lab .lab-icon .folder-open,#course-lab .lab-card[open] .folder-closed{display:none}
+#course-lab .lab-card[open] .folder-open{display:inline-block}
 #course-lab .lab-heading h2{color:#234b6d;font-size:27px;line-height:1.2;letter-spacing:-.4px;font-weight:600;margin:0 0 7px}
 #course-lab .lab-icon{display:grid;place-items:center;flex:0 0 52px;height:56px;color:#336699;background:#edf4f9;border-radius:10px;font-size:26px}
 #course-lab .lab-format{display:inline-flex;align-items:center;gap:6px;color:#536878;font-size:12px}

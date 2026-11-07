@@ -11,11 +11,12 @@ assignment_url: "/assignments/"
     <h1>Laboratories</h1>
     <p>Download the environments and files for the course labs. Each lab lists its setup, whether it uses containers, a virtual machine, or another environment.</p>
   </header>
-  <article class="lab-card" aria-labelledby="documents-lab-title">
-    <div class="lab-heading">
-      <span class="lab-icon"><i class="far fa-folder-open" aria-hidden="true"></i></span>
+  <details class="lab-card" aria-labelledby="documents-lab-title">
+    <summary class="lab-heading">
+      <span class="lab-icon" aria-hidden="true"><i class="far fa-folder folder-closed"></i><i class="far fa-folder-open folder-open"></i></span>
       <div><h2 id="documents-lab-title">Internal Documents Lab</h2><span class="lab-format"><i class="fas fa-cubes" aria-hidden="true"></i> Docker · ZIP package</span></div>
-    </div>
+      <i class="fas fa-chevron-down lab-toggle" aria-hidden="true"></i>
+    </summary>
     <p class="lab-description">A fictional organization’s document service, with two departments, shared documents, backups, and activity logs. Explore how access controls and data exposure affect its security.</p>
     <div class="lab-actions">
       <a class="lab-button" href="{{ page.lab_download_url | relative_url }}" download="internal-documents-lab.zip"><i class="fas fa-download" aria-hidden="true"></i> Download lab files</a>
@@ -32,5 +33,5 @@ assignment_url: "/assignments/"
       </div>
     </section>
     <footer class="lab-credit"><span>Threats by Design</span><span aria-hidden="true">·</span><em>S Alimohammadi</em></footer>
-  </article>
+  </details>
 </main>
