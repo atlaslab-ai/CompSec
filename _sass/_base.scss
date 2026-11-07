@@ -302,6 +302,15 @@ a.tosu {
         background-color: #f2dede;
     }
 
+    // Keep every column and link in the colored schedule rows bold.
+    .table-row-assignment,
+    .table-row-due,
+    .table-row-exam {
+        &, * {
+            font-weight: 700;
+        }
+    }
+
     .col-1 {
         padding: 2px;
         flex-basis: 10%;
