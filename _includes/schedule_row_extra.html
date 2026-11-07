@@ -19,6 +19,16 @@
                 <strong>{{ extra.title }}</strong>
             </div>
             <div class="col col-4">
+                {% if extra.topics %}
+                <p style="margin-bottom: 10px;">{{ extra.topics_label | escape }}</p>
+                <dl style="margin: 0;">
+                    {% assign topic_start = extra.topic_start | default: 1 %}
+                    {% for topic in extra.topics %}
+                    <dt>{{ forloop.index0 | plus: topic_start }}. {{ topic.title | escape }}</dt>
+                    <dd style="margin: 2px 0 12px;">{{ topic.references | escape }}</dd>
+                    {% endfor %}
+                </dl>
+                {% else %}
                 {% comment %}
                 If _data/schedule_extras.yml has material_url, it is used here.
                 Otherwise, try to locate the Internal Documents Lab in _assignments.
@@ -38,6 +48,7 @@
                     <a href="{{ material_link | relative_url }}">{{ extra.title }}</a>
                 {% else %}
                     &mdash;
+                {% endif %}
                 {% endif %}
             </div>
         </li>
