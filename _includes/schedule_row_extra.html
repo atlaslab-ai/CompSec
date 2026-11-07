@@ -23,7 +23,7 @@
                 <dl style="margin: 0; font-size: 0.85em; line-height: 1.45;">
                     {% for topic in extra.topics %}
                     <dt>{{ topic.title | escape }}</dt>
-                    <dd style="margin: 1px 0 7px;">{{ topic.references | escape }}</dd>
+                    <dd style="margin: 1px 0 7px; font-weight: 400; font-style: italic;">{{ topic.references | escape }}</dd>
                     {% endfor %}
                 </dl>
                 {% else %}
