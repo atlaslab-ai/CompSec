@@ -1,0 +1,43 @@
+{% assign extra = include.extra %}
+<li class="table-row table-row-{{ extra.type }}{% if extra.due %} table-row-due{% endif %}{% if extra.category == 'Exam' %} table-row-exam{% endif %}">
+            <div class="col col-1">
+                {% if extra.due %}Due{% else %}{{ extra.category }}{% endif %}
+            </div>
+            <div class="col col-1-2">
+                {% if extra.due %}
+                    <strong>{{ extra.due | date: '%m/%d/%Y' }}</strong>
+                    <br />{{ extra.due | date: '%A' }}
+                {% elsif extra.date %}
+                    <strong>{{ extra.date | date: '%m/%d/%Y' }}</strong>
+                    <br />{{ extra.date | date: '%A' }}
+                    {% if extra.start_time %}<br />{{ extra.start_time }}–{{ extra.end_time }}{% endif %}
+                {% else %}
+                    TBA
+                {% endif %}
+            </div>
+            <div class="col col-2">
+                <strong>{{ extra.title }}</strong>
+            </div>
+            <div class="col col-4">
+                {% comment %}
+                If _data/schedule_extras.yml has material_url, it is used here.
+                Otherwise, try to locate the Internal Documents Lab in _assignments.
+                {% endcomment %}
+                {% assign material_link = extra.material_url | default: '' %}
+                {% if material_link == '' and extra.title contains 'Internal Documents Lab' %}
+                    {% for assignment_doc in site.assignments %}
+                        {% assign candidate_title = assignment_doc.title | default: '' | downcase %}
+                        {% assign candidate_url = assignment_doc.url | default: '' | downcase %}
+                        {% if candidate_title contains 'internal documents lab' or candidate_url contains 'internal-documents' or candidate_url contains 'internal_documents' %}
+                            {% assign material_link = assignment_doc.url %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                {% if material_link != '' %}
+                    <a href="{{ material_link | relative_url }}">{{ extra.title }}</a>
+                {% else %}
+                    &mdash;
+                {% endif %}
+            </div>
+        </li>

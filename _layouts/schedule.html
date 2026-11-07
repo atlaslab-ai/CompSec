@@ -8,6 +8,41 @@ layout: default
 
 {{ content }}
 
+{% comment %}
+Dated rows follow their calendar date, regardless of after_session.
+Undated rows retain their position immediately after their anchor lecture.
+The final key component identifies the original collection item.
+{% endcomment %}
+{% assign row_keys = '' %}
+{% for lecture in site.lectures %}
+    {% assign row_key = lecture.date | date: '%Y%m%d%H%M%S' | append: '|0|' | append: forloop.index0 %}
+    {% assign row_keys = row_keys | append: row_key | append: '~' %}
+{% endfor %}
+{% for extra in site.data.schedule_extras %}
+    {% assign extra_index = forloop.index0 %}
+    {% assign extra_timestamp = '' %}
+    {% if extra.due %}
+        {% assign extra_timestamp = extra.due | date: '%Y%m%d' | append: '235959' %}
+    {% elsif extra.date %}
+        {% assign extra_time = extra.start_time | default: '00:00' | remove: ':' | append: '00' %}
+        {% assign extra_timestamp = extra.date | date: '%Y%m%d' | append: extra_time %}
+    {% else %}
+        {% assign anchor_session = extra.after_session | append: '' | strip %}
+        {% for lecture in site.lectures %}
+            {% assign lecture_session = lecture.session_key | append: '' | strip %}
+            {% if lecture_session == anchor_session %}
+                {% assign extra_timestamp = lecture.date | date: '%Y%m%d%H%M%S' %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    {% if extra_timestamp != '' %}
+        {% assign row_key = extra_timestamp | append: '|1|' | append: extra_index %}
+        {% assign row_keys = row_keys | append: row_key | append: '~' %}
+    {% endif %}
+{% endfor %}
+{% assign sorted_row_keys = row_keys | split: '~' | sort %}
+
 <div class="home" style="font-size: 0.8em;">
     <ul class="responsive-table" style="margin-left: 0;">
         <li class="table-header">
@@ -16,68 +51,20 @@ layout: default
             <div class="col col-2">Description</div>
             <div class="col col-4">Course Material</div>
         </li>
-
-        {% comment %}
-        Keep the original schedule structure and CSS classes.
-        Only the new lectures are listed: old AI-course assignments/events
-        are deliberately excluded. Undated items come from _data/schedule_extras.yml.
-        {% endcomment %}
-        {% assign all_events_sorted = site.lectures | sort: 'date' %}
-
-        {% for event in all_events_sorted %}
+        {% for row_key in sorted_row_keys %}
+            {% if row_key != '' %}
+                {% assign row_parts = row_key | split: '|' %}
+                {% assign row_index = row_parts[2] | plus: 0 %}
+                {% if row_parts[1] == '0' %}
+                    {% assign event = site.lectures[row_index] %}
         <li class="table-row table-row-{{ event.type }}">
-            {% include schedule_row_{{ event.type }}.html event=event %}
+                    {% include schedule_row_{{ event.type }}.html event=event %}
         </li>
-
-        {% assign current_session = event.session_key | append: '' | strip %}
-        {% for extra in site.data.schedule_extras %}
-            {% assign anchor_session = extra.after_session | append: '' | strip %}
-            {% if current_session == anchor_session %}
-        <li class="table-row table-row-{{ extra.type }}{% if extra.due %} table-row-due{% endif %}{% if extra.category == 'Exam' %} table-row-exam{% endif %}">
-            <div class="col col-1">
-                {% if extra.due %}Due{% else %}{{ extra.category }}{% endif %}
-            </div>
-            <div class="col col-1-2">
-                {% if extra.due %}
-                    <strong>{{ extra.due | date: '%m/%d/%Y' }}</strong>
-                    <br />{{ extra.due | date: '%A' }}
-                {% elsif extra.date %}
-                    <strong>{{ extra.date | date: '%m/%d/%Y' }}</strong>
-                    <br />{{ extra.date | date: '%A' }}
-                    {% if extra.start_time %}<br />{{ extra.start_time }}–{{ extra.end_time }}{% endif %}
                 {% else %}
-                    TBA
+                    {% assign extra = site.data.schedule_extras[row_index] %}
+                    {% include schedule_row_extra.html extra=extra %}
                 {% endif %}
-            </div>
-            <div class="col col-2">
-                <strong>{{ extra.title }}</strong>
-            </div>
-            <div class="col col-4">
-                {% comment %}
-                If _data/schedule_extras.yml has material_url, it is used here.
-                Otherwise, try to locate the Internal Documents Lab in _assignments.
-                {% endcomment %}
-                {% assign material_link = extra.material_url | default: '' %}
-                {% if material_link == '' and extra.title contains 'Internal Documents Lab' %}
-                    {% for assignment_doc in site.assignments %}
-                        {% assign candidate_title = assignment_doc.title | default: '' | downcase %}
-                        {% assign candidate_url = assignment_doc.url | default: '' | downcase %}
-                        {% if candidate_title contains 'internal documents lab' or candidate_url contains 'internal-documents' or candidate_url contains 'internal_documents' %}
-                            {% assign material_link = assignment_doc.url %}
-                            {% break %}
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-                {% if material_link != '' %}
-                    <a href="{{ material_link | relative_url }}">{{ extra.title }}</a>
-                {% else %}
-                    &mdash;
-                {% endif %}
-            </div>
-        </li>
             {% endif %}
         {% endfor %}
-        {% endfor %}
-
     </ul>
 </div>
