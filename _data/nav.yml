@@ -22,3 +22,7 @@ items:
 - url: /materials/
   name: Materials
   icon_class: fas fa-book
+
+- url: /laboratory/
+  name: Laboratory
+  icon_class: fas fa-flask
