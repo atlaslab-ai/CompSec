@@ -3,140 +3,81 @@ layout: default
 ---
 
 <header class="post-header">
-  <h1 class="post-title">Schedule</h1>
+    <h1 class="post-title">Schedule</h1>
 </header>
 
 {{ content }}
 
-<!-- Scoped to the schedule: other pages and course site styles remain unchanged. -->
-<style>
-  #compsec-schedule { font-size: 0.95rem; line-height: 1.5; }
-  #compsec-schedule ul.responsive-table { margin: 0; padding: 0; list-style: none; }
-  #compsec-schedule .table-header,
-  #compsec-schedule .table-row {
-    display: grid;
-    grid-template-columns: minmax(80px, 0.8fr) minmax(130px, 1.1fr) minmax(220px, 2.5fr) minmax(145px, 1.6fr);
-    gap: 14px;
-    align-items: start;
-    box-sizing: border-box;
-    font-size: inherit;
-    line-height: inherit;
-    margin: 0 0 8px;
-    padding: 13px 14px;
-    list-style: none;
-  }
-  #compsec-schedule .table-header {
-    background: #e9eff5;
-    border: 1px solid #d9e0e8;
-    border-radius: 5px;
-    color: #283442;
-    font-weight: 700;
-  }
-  #compsec-schedule .table-row {
-    background: #fff;
-    color: #253142;
-    border: 1px solid #e3e7eb;
-    border-radius: 5px;
-  }
-  #compsec-schedule .table-row .col,
-  #compsec-schedule .table-header .col {
-    float: none;
-    width: auto !important;
-    max-width: none;
-    min-width: 0;
-    padding: 0 !important;
-    margin: 0;
-    flex: none;
-    font-size: inherit;
-    overflow-wrap: anywhere;
-  }
-  #compsec-schedule .table-row .col p { margin-top: 0; }
-  #compsec-schedule .table-row-lecture { border-left: 4px solid #9fb4ce; }
-  #compsec-schedule .compsec-extra { border-left: 4px solid #d2a24c; }
-  #compsec-schedule .compsec-exam {
-    border-left-color: #b9685b;
-    background: #fff8f5;
-  }
-  #compsec-schedule .compsec-muted { color: #5b6774; }
-  #compsec-schedule .compsec-event-title { font-weight: 650; }
-  #compsec-schedule a { text-decoration: underline; text-underline-offset: 2px; }
-  @media (max-width: 780px) {
-    #compsec-schedule .table-header { display: none; }
-    #compsec-schedule .table-row {
-      grid-template-columns: 1fr;
-      gap: 5px;
-      padding: 12px;
-    }
-    #compsec-schedule .table-row .col { width: 100% !important; }
-  }
-</style>
+<div class="home" style="font-size: 0.8em;">
+    <ul class="responsive-table" style="margin-left: 0;">
+        <li class="table-header">
+            <div class="col col-1">Event</div>
+            <div class="col col-1-2">Date</div>
+            <div class="col col-2">Description</div>
+            <div class="col col-4">Course Material</div>
+        </li>
 
-<div id="compsec-schedule" class="home">
-  <ul class="responsive-table">
-    <li class="table-header">
-      <div class="col col-1">Event</div>
-      <div class="col col-1-2">Date</div>
-      <div class="col col-2">Description</div>
-      <div class="col col-4">Course Material</div>
-    </li>
+        {% comment %}
+        Keep the original schedule structure and CSS classes.
+        Only the new lectures are listed: old AI-course assignments/events
+        are deliberately excluded. Undated items come from _data/schedule_extras.yml.
+        {% endcomment %}
+        {% assign all_events_sorted = site.lectures | sort: 'date' %}
 
-    {% assign lectures_sorted = site.lectures | sort: 'date' %}
-    {% for event in lectures_sorted %}
-      <li class="table-row table-row-lecture">
-        {% include schedule_row_lecture.html event=event %}
-      </li>
+        {% for event in all_events_sorted %}
+        <li class="table-row table-row-{{ event.type }}">
+            {% include schedule_row_{{ event.type }}.html event=event %}
+        </li>
 
-      {% assign current_session = event.session_key | append: '' | strip %}
-      {% for extra in site.data.schedule_extras %}
-        {% assign anchor_session = extra.after_session | append: '' | strip %}
-        {% if current_session == anchor_session %}
-          <li class="table-row compsec-extra{% if extra.category == 'Exam' %} compsec-exam{% else %} table-row-assignment{% endif %}">
+        {% assign current_session = event.session_key | append: '' | strip %}
+        {% for extra in site.data.schedule_extras %}
+            {% assign anchor_session = extra.after_session | append: '' | strip %}
+            {% if current_session == anchor_session %}
+        <li class="table-row table-row-{{ extra.type }}{% if extra.due %} table-row-due{% endif %}{% if extra.category == 'Exam' %} table-row-exam{% endif %}">
             <div class="col col-1">
-              <strong>{{ extra.category }}</strong>
+                {% if extra.due %}Due{% else %}{{ extra.category }}{% endif %}
             </div>
             <div class="col col-1-2">
-              {% if extra.due %}
-                <strong>Due</strong>
-                {{ extra.due | date: '%m/%d/%Y' }}
-              {% elsif extra.date %}
-                {{ extra.date | date: '%m/%d/%Y' }}
-                {% if extra.start_time %}<br>{{ extra.start_time }}–{{ extra.end_time }}{% endif %}
-              {% else %}
-                <span class="compsec-muted">TBA</span>
-              {% endif %}
+                {% if extra.due %}
+                    <strong>{{ extra.due | date: '%m/%d/%Y' }}</strong>
+                    <br />{{ extra.due | date: '%A' }}
+                {% elsif extra.date %}
+                    <strong>{{ extra.date | date: '%m/%d/%Y' }}</strong>
+                    <br />{{ extra.date | date: '%A' }}
+                    {% if extra.start_time %}<br />{{ extra.start_time }}–{{ extra.end_time }}{% endif %}
+                {% else %}
+                    TBA
+                {% endif %}
             </div>
             <div class="col col-2">
-              <span class="compsec-event-title">{{ extra.title }}</span>
+                <strong>{{ extra.title }}</strong>
             </div>
             <div class="col col-4">
-              {% comment %}
-                Explicit material_url takes priority. If not set, automatically find
-                the pre-existing Internal Documents Lab in the assignments collection.
-              {% endcomment %}
-              {% assign material_link = extra.material_url | default: '' %}
-              {% if material_link == '' %}
-                {% if extra.title contains 'Internal Documents Lab' %}
-                  {% for assignment_doc in site.assignments %}
-                    {% assign candidate_title = assignment_doc.title | default: '' | downcase %}
-                    {% assign candidate_url = assignment_doc.url | default: '' | downcase %}
-                    {% if candidate_title contains 'internal documents lab' or candidate_url contains 'internal_documents_lab' or candidate_url contains 'internal-documents-lab' %}
-                      {% assign material_link = assignment_doc.url %}
-                      {% break %}
-                    {% endif %}
-                  {% endfor %}
+                {% comment %}
+                If _data/schedule_extras.yml has material_url, it is used here.
+                Otherwise, try to locate the Internal Documents Lab in _assignments.
+                {% endcomment %}
+                {% assign material_link = extra.material_url | default: '' %}
+                {% if material_link == '' and extra.title contains 'Internal Documents Lab' %}
+                    {% for assignment_doc in site.assignments %}
+                        {% assign candidate_title = assignment_doc.title | default: '' | downcase %}
+                        {% assign candidate_url = assignment_doc.url | default: '' | downcase %}
+                        {% if candidate_title contains 'internal documents lab' or candidate_url contains 'internal-documents' or candidate_url contains 'internal_documents' %}
+                            {% assign material_link = assignment_doc.url %}
+                            {% break %}
+                        {% endif %}
+                    {% endfor %}
                 {% endif %}
-              {% endif %}
-              {% if material_link != '' %}
-                <a href="{{ material_link | relative_url }}">{{ extra.title }}</a>
-              {% elsif extra.category == 'Exam' %}
-                <span class="compsec-muted">—</span>
-              {% else %}
-                <span class="compsec-muted">To be announced</span>
-              {% endif %}
+                {% if material_link != '' %}
+                    <a href="{{ material_link | relative_url }}">{{ extra.title }}</a>
+                {% else %}
+                    &mdash;
+                {% endif %}
             </div>
-          </li>
-        {% endif %}
-      {% endfor %}
-    {% endfor %}
-  </ul>
+        </li>
+            {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+    </ul>
 </div>
