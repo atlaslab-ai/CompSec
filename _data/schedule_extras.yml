@@ -1,0 +1,49 @@
+# Unscheduled items are anchored after a lecture and have no calendar date.
+- after_session: '02'
+  type: assignment
+  category: Hands-on
+  title: 'Hands-on 1: Internal Documents Lab'
+  due: '2026-11-21'
+- after_session: '06'
+  type: assignment
+  category: Assignment
+  title: Assignment
+- after_session: '12'
+  type: assignment
+  category: Hands-on
+  title: Hands-on
+- after_session: '16'
+  type: assignment
+  category: Assignment
+  title: Assignment
+- after_session: '16'
+  type: event
+  category: Exam
+  title: Midterm Exam
+- after_session: '20'
+  type: assignment
+  category: Hands-on
+  title: Hands-on
+- after_session: '24'
+  type: assignment
+  category: Assignment
+  title: Assignment
+- after_session: '28'
+  type: assignment
+  category: Hands-on
+  title: Hands-on
+- after_session: '31'
+  type: assignment
+  category: Assignment
+  title: Assignment
+- after_session: '33'
+  type: assignment
+  category: Hands-on
+  title: Hands-on
+- after_session: '33'
+  type: event
+  category: Exam
+  title: Final Exam
+  date: '2027-01-09'
+  start_time: 09:00
+  end_time: '12:00'
