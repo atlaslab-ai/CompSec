@@ -1,0 +1,71 @@
+---
+layout: default
+title: Laboratories
+permalink: /laboratory/
+lab_download_url: ""
+assignment_url: "/assignments/"
+---
+<link rel="stylesheet" href="{{ '/assets/laboratory/laboratory.css' | relative_url }}">
+<main id="course-lab">
+  <header class="lab-intro">
+    <p class="eyebrow"><span></span> COMPUTER SECURITY / HANDS-ON LEARNING</p>
+    <h1>Laboratories<span>.</span></h1>
+    <p class="intro-copy">Get inside the systems you study.</p>
+    <p class="intro-detail">Explore security through practical challenges. Find each lab’s environment, background, and assignment here — from containers and virtual machines to other experimental setups.</p>
+  </header>
+
+  <article class="lab-feature" aria-labelledby="internal-documents-title">
+    <div class="feature-top"><span class="lab-number">LAB / 01</span><span class="environment"><i class="fas fa-cubes" aria-hidden="true"></i> Docker environment</span></div>
+    <div class="feature-grid">
+      <div class="feature-copy">
+        <p class="eyebrow">HANDS-ON 1</p>
+        <h2 id="internal-documents-title">Internal<br>Documents Lab</h2>
+        <p class="feature-lead">The right document.<br>The right person. Every time.</p>
+        <p>A fictional organization runs a shared document service for its Engineering and Finance teams. Employees read and edit documents, managers oversee their units, and a maintenance operator looks after backups.</p>
+        <p>You join the team reviewing its security. Investigate what each person can actually access, trace what the service records, and improve the system while keeping everyday work running.</p>
+      </div>
+      <div class="system-visual" role="img" aria-label="The document service connects two teams, Engineering and Finance, with documents, a backup service, and an audit trail.">
+        <div class="visual-top"><span><b></b><b></b><b></b></span><span>INTERNAL / WORKSPACE</span></div>
+        <div class="visual-heading"><i class="far fa-folder-open" aria-hidden="true"></i><span>One service.<br><strong>Several boundaries.</strong></span></div>
+        <div class="team-row"><span><i class="fas fa-code" aria-hidden="true"></i> Engineering</span><span><i class="fas fa-chart-line" aria-hidden="true"></i> Finance</span></div>
+        <div class="visual-doc"><i class="far fa-file-alt" aria-hidden="true"></i><div><strong>Internal documents</strong><span>Read · Download · Edit</span></div><span class="visual-arrow">↗</span></div>
+        <div class="visual-services"><div><i class="fas fa-database" aria-hidden="true"></i><strong>Backup</strong><span>Maintenance access</span></div><div><i class="fas fa-stream" aria-hidden="true"></i><strong>Audit trail</strong><span>Who did what?</span></div></div>
+        <p class="visual-caption">FOLLOW THE DATA. QUESTION THE ACCESS.</p>
+      </div>
+    </div>
+    <div class="focus-strip" aria-label="What you will investigate">
+      <div><span>01</span><p><strong>Access control</strong>Who can read or change each document?</p></div>
+      <div><span>02</span><p><strong>Backup exposure</strong>Who can reach the service’s backup?</p></div>
+      <div><span>03</span><p><strong>Security logging</strong>What does a request leave behind?</p></div>
+    </div>
+
+    <section class="lab-context" aria-labelledby="context-title">
+      <div class="section-heading"><p class="eyebrow">THE REAL-WORLD CONNECTION</p><h3 id="context-title">Built from real failures.</h3><p>We designed this challenge around the kinds of mistakes seen in these three incidents. Their lessons shape the lab’s access rules, backup boundaries, and logging requirements.</p></div>
+      <div class="incident-grid">
+        <article class="incident"><div class="incident-meta"><span>01 / DOCUMENT ACCESS</span><time datetime="2019">2019</time></div><h4>First American</h4><p class="incident-subtitle">A document link opened too many doors.</p><p>A flaw in EaglePro allowed document identifiers in links to be changed to reach unrelated documents without authentication, as described in the New York regulator’s findings.</p><div class="lab-connection"><strong>In this lab</strong><p>Check who can access a document through a direct request.</p></div><a href="https://www.dfs.ny.gov/system/files/documents/2024/10/ea20231127_co_first_american.pdf">Read the NYDFS findings <span aria-hidden="true">↗</span><span class="sr-only"> (PDF)</span></a></article>
+        <article class="incident"><div class="incident-meta"><span>02 / BACKUP EXPOSURE</span><time datetime="2023">2023</time></div><h4>Microsoft AI research</h4><p class="incident-subtitle">A shared link reached private backups.</p><p>Wiz reported that an overly broad Azure sharing token exposed 38 TB of private data, including two employees’ workstation backups, while researchers shared AI models.</p><div class="lab-connection"><strong>In this lab</strong><p>Review the backup route as carefully as the main application.</p></div><a href="https://www.wiz.io/blog/38-terabytes-of-private-data-accidentally-exposed-by-microsoft-ai-researchers">Read the Wiz investigation <span aria-hidden="true">↗</span></a></article>
+        <article class="incident"><div class="incident-meta"><span>03 / SENSITIVE LOGS</span><time datetime="2018">2018</time></div><h4>Twitter</h4><p class="incident-subtitle">Passwords ended up in an internal log.</p><p>Twitter disclosed that a bug wrote passwords to a log before hashing. It removed the passwords and reported no indication of a breach or misuse.</p><div class="lab-connection"><strong>In this lab</strong><p>Keep useful security events while leaving secrets out of logs.</p></div><a href="https://blog.x.com/en/company/keeping-your-account-secure">Read Twitter’s disclosure <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </section>
+
+    <section class="lab-resources" aria-labelledby="resources-title">
+      <div class="section-heading"><p class="eyebrow">YOUR STARTING POINT</p><h3 id="resources-title">Get the environment.<br>Take on the challenge.</h3></div>
+      <div class="resource-grid">
+        <div class="resource"><span class="resource-icon"><i class="fas fa-file-archive" aria-hidden="true"></i></span><div><h4>Lab environment</h4><p>The files for running Internal Documents Lab with Docker on your computer.</p>
+          {% if page.lab_download_url and page.lab_download_url != '' %}
+          {% assign download_prefix = page.lab_download_url | slice: 0, 8 %}
+          {% if download_prefix == 'https://' %}
+          <a class="lab-button" href="{{ page.lab_download_url | escape }}">Download lab files <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+          {% else %}
+          <a class="lab-button" href="{{ page.lab_download_url | relative_url }}">Download lab files <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+          {% endif %}
+          {% else %}
+          <span class="resource-pending"><span></span> Download available soon</span>
+          {% endif %}
+        </div></div>
+        <div class="resource"><span class="resource-icon"><i class="far fa-file-alt" aria-hidden="true"></i></span><div><h4>Assignment brief</h4><p>The scenario, security rules, tasks, and submission details will be published in Assignments.</p><a class="lab-button lab-button-outline" href="{{ page.assignment_url | relative_url }}">View assignments <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div></div>
+      </div>
+    </section>
+    <footer class="lab-credit"><span>Threats by Design</span><span aria-hidden="true">·</span><em>S Alimohammadi</em></footer>
+  </article>
+</main>
