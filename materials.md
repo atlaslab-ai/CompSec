@@ -46,7 +46,7 @@ Chapter 1 — Security Management.
 
 **H. R. Shahriari**
 
-Course lecture notes, distributed through the course website.
+Course lecture notes.
 
 ---
 
@@ -64,8 +64,3 @@ iTrust Conference, 2004.
 
 Information security risk management standard, 2022.
 
----
-
-## Additional Course Materials
-
-Lecture slides, supplementary readings, and other course materials will be made available throughout the semester.
