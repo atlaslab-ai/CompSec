@@ -30,6 +30,42 @@ permalink: /materials/
 
 ---
 
+## Supplementary References
+
+### [3] Computer Security and the Internet: Tools and Jewels
+
+**Paul C. van Oorschot**
+
+Springer, 2020.
+
+Chapter 1 — Security Management.
+
+---
+
+### [4] Lecture Notes on Reputation Models
+
+**H. R. Shahriari**
+
+Course lecture notes, distributed through the course website.
+
+---
+
+### [5] Enhanced Reputation Mechanism for Mobile Ad Hoc Networks
+
+**J. Liu and V. Issarny**
+
+iTrust Conference, 2004.
+
+---
+
+### [6] Information Security, Cybersecurity and Privacy Protection — Guidance on Managing Information Security Risks
+
+**ISO/IEC 27005:2022**
+
+Information security risk management standard, 2022.
+
+---
+
 ## Additional Course Materials
 
 Lecture slides, supplementary readings, and other course materials will be made available throughout the semester.
