@@ -6,6 +6,11 @@
   due: '2026-11-21'
 - after_session: '06'
   type: assignment
+  category: Hands-on
+  title: 'Hands-on 1: Internal Documents Lab — Released'
+  date: '2026-11-07'
+- after_session: '06'
+  type: assignment
   category: Assignment
   title: Assignment
 - after_session: '12'
@@ -45,5 +50,5 @@
   category: Exam
   title: Final Exam
   date: '2027-01-09'
-  start_time: 09:00
+  start_time: '09:00'
   end_time: '12:00'

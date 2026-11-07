@@ -6,7 +6,7 @@ permalink: /materials/
 
 ## Main References
 
-{% include image.html url="/_images/bishop_cover.png" width=175 align="right" %}
+<img class="alignright" src="{{ '/_images/bishop_cover.png' | relative_url }}" alt="Cover of Computer Security: Art and Science by Matt Bishop, second edition" width="175" height="224" style="width:175px;height:224px;object-fit:cover;object-position:center;border:0;" />
 
 ### [1] Computer Security: Art and Science
 
