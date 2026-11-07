@@ -20,12 +20,10 @@
             </div>
             <div class="col col-4">
                 {% if extra.topics %}
-                <p style="margin-bottom: 10px;">{{ extra.topics_label | escape }}</p>
-                <dl style="margin: 0;">
-                    {% assign topic_start = extra.topic_start | default: 1 %}
+                <dl style="margin: 0; font-size: 0.85em; line-height: 1.45;">
                     {% for topic in extra.topics %}
-                    <dt>{{ forloop.index0 | plus: topic_start }}. {{ topic.title | escape }}</dt>
-                    <dd style="margin: 2px 0 12px;">{{ topic.references | escape }}</dd>
+                    <dt>{{ topic.title | escape }}</dt>
+                    <dd style="margin: 1px 0 7px;">{{ topic.references | escape }}</dd>
                     {% endfor %}
                 </dl>
                 {% else %}

@@ -25,8 +25,6 @@
   type: event
   category: Exam
   title: Midterm Exam
-  topics_label: Exam topics
-  topic_start: 1
   topics:
     - title: Introduction
       references: 'Bishop Ch. 1; Stallings Ch. 1'
@@ -63,8 +61,6 @@
   date: '2027-01-09'
   start_time: '09:00'
   end_time: '12:00'
-  topics_label: Post-midterm topics
-  topic_start: 5
   topics:
     - title: Confidentiality Policies
       references: 'Bishop §§5.1–5.3'
