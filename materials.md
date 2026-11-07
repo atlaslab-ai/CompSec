@@ -2,12 +2,12 @@
 ---
 layout: page
 title: Materials
-permalink: /materials/
+permalink: /materials
 ---
 
 ## Main References
 
-{% include image.html url="/_images/bishop_cover.png" width=195 align="right" %}
+{% include image.html url="/_images/bishop_cover.png" length=175 align="right" %}
 
 ### [1] Computer Security: Art and Science
 
