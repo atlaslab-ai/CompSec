@@ -7,7 +7,7 @@ permalink: /materials/
 
 ## Main References
 
-{% include image.html url="/_images/bishop_cover.png" width=175 align="right" %}
+{% include image.html url="/_images/bishop_cover.png" width=195 align="right" %}
 
 ### [1] Computer Security: Art and Science
 
@@ -15,7 +15,7 @@ permalink: /materials/
 
 2nd Edition, Addison-Wesley (Pearson), 2019.
 
-<br clear="all">
+<div style="clear: both;"></div>
 
 ---
 
@@ -27,7 +27,7 @@ permalink: /materials/
 
 3rd Edition, Pearson, 2015.
 
-<br clear="all">
+<div style="clear: both;"></div>
 
 ---
 
