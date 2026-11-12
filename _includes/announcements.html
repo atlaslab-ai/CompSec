@@ -22,7 +22,8 @@
                 New Lecture is up: {{ n.title }}
                 {% include lecture_links.html lecture=n %}
             {% elsif n.type == 'assignment' %}
-                {{ n.release_label | default: 'New Assignment released' }}: [<a href="{{ n.url | prepend: site.baseurl }}">{{ n.title }}</a>]
+                {% assign release_url = n.pdf | default: n.url %}
+                {{ n.release_label | default: 'New Assignment released' }}: [<a href="{{ release_url | relative_url }}">{{ n.title }}</a>]
             {% else%}
                 {{ n.description }}
             {% endif %}
