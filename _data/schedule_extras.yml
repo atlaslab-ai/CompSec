@@ -12,7 +12,9 @@
 - after_session: '06'
   type: assignment
   category: Assignment
-  title: Assignment
+  title: 'Assignment 1 — Released'
+  date: '2026-11-11'
+  material_url: /assets/assignments/Computer_Security_ASG1.pdf
 - after_session: '12'
   type: assignment
   category: Hands-on
